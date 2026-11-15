@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Daily Recipes - Lemon Pasta</title>
+<link id="fav" rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='7' fill='%23f4b400'/></svg>">
+<style>
+  body { font-family: Georgia, serif; max-width: 760px; margin: 40px auto; padding: 0 16px; color: #333; background: #fffaf0; }
+  h1 { color: #a0522d; }
+  .card { background: #fff; border: 1px solid #e5d8c0; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+</style>
+</head>
+<body>
+<!-- Test page: a page that turns into a generic fake login page
+     a few seconds after the user switches to another tab (simulated tabnabbing). -->
+<div id="content">
+  <h1>Lemon Pasta in 15 Minutes</h1>
+  <p>This simple pasta uses only a handful of ingredients: spaghetti, lemons, butter, parmesan and black pepper.</p>
+  <div class="card">
+    <h2>Ingredients</h2>
+    <ul><li>200 g spaghetti</li><li>1 lemon (zest and juice)</li><li>30 g butter</li><li>40 g parmesan</li><li>Black pepper</li></ul>
+  </div>
+  <div class="card">
+    <h2>Steps</h2>
+    <ol><li>Cook the pasta in salted water.</li><li>Melt the butter with the lemon zest.</li><li>Toss everything with a splash of pasta water and the cheese.</li></ol>
+  </div>
+  <p><em>Switch to another tab for a few seconds, then come back.</em></p>
+</div>
+<script>
+  let timer = null;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      timer = setTimeout(attack, Number(new URLSearchParams(location.search).get('delay') || 2000));
+    } else {
+      clearTimeout(timer);
+    }
+  });
+  window.attack = attack;
+  function attack() {
+    document.title = 'Sign in';
+    document.getElementById('fav').href = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%231a73e8'/></svg>";
+    document.body.style.cssText = 'background:#f1f3f4;font-family:Arial,sans-serif;margin:0';
+    document.body.innerHTML = `
+      <div style="max-width:380px;margin:80px auto;background:#fff;padding:40px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.2)">
+        <h2 style="margin-top:0;color:#202124">Your session has expired</h2>
+        <p style="color:#5f6368">Please sign in again to continue.</p>
+        <input placeholder="Email" style="width:100%;box-sizing:border-box;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:4px">
+        <input placeholder="Password" type="password" style="width:100%;box-sizing:border-box;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:4px">
+        <button style="width:100%;padding:12px;background:#1a73e8;color:#fff;border:0;border-radius:4px;font-size:16px">Sign in</button>
+      </div>`;
+  }
+</script>
+</body>
+</html>
